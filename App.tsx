@@ -7,7 +7,7 @@ import {
 } from '@expo-google-fonts/jost';
 import AppLoading from 'expo-app-loading';
 
-import { Confirmation } from './src/views/Confirmation';
+import Routes from './src/routes';
 
 export default function App() {
   
@@ -25,7 +25,7 @@ export default function App() {
 
   return (
 
-    <Confirmation />
+    <Routes />
     
   )
 }
