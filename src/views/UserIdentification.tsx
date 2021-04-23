@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
     StyleSheet,
     SafeAreaView,
@@ -8,15 +8,35 @@ import {
 } from 'react-native';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
+import {Button} from '../components/Button'
 
 export function UserIdentification(){
+
+    const [isFocused, setIsFocused] = useState(false)
+    const [isFilled, setIsFilled] = useState(false)
+    const [name, setName] = useState<string>()
+
+    function handleInputBlur(){
+        setIsFocused(false);
+        setIsFilled(!!name);
+    }
+
+    function handleInputFocus(){
+        setIsFocused(true);
+    }
+
+    function handleInputChange(value: string){
+        setIsFilled(!!value);
+
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.form}>
     
                     <Text style={styles.emoji}>
-                        :D
+                        { isFilled ? ':D' : ':)'}
                     </Text>
 
                     <Text style={styles.title}>
@@ -25,10 +45,22 @@ export function UserIdentification(){
                     </Text>
 
                     <TextInput
-                        style={styles.input}
+                        style={[
+                            styles.input,
+                            (isFocused || isFilled) &&
+                            {borderColor: colors.green}
+                        ]}
+                        placeholder='Digite seu nome'
+                        onBlur={handleInputBlur}
+                        onFocus={handleInputFocus}
+                        onChangeText={handleInputChange}
                     />
-                </View>
 
+                    <View style={styles.footer}>
+                        <Button />
+                    </View>
+
+                </View>
             </View>
         </SafeAreaView>
     )
@@ -49,7 +81,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         paddingHorizontal: 54,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     emoji:{
         fontSize: 44
@@ -71,5 +103,10 @@ const styles = StyleSheet.create({
         color: colors.heading,
         lineHeight: 32,
         marginTop: 30
+    },
+    footer:{
+        marginTop: 40,
+        width: '100%',
+        paddingHorizontal: 20
     }
 })
