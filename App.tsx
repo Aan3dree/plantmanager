@@ -7,6 +7,8 @@ import {
 } from '@expo-google-fonts/jost';
 import AppLoading from 'expo-app-loading';
 
+import { UserIdentification } from './src/views/UserIdentification';
+
 export default function App() {
   
   const [fontsLoaded] = useFonts({
@@ -23,7 +25,7 @@ export default function App() {
 
   return (
 
-    <Welcome />
+    <UserIdentification />
     
   )
 }
